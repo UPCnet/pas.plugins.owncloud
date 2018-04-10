@@ -1,26 +1,27 @@
-# -*- coding: utf-8 -*-
-# from Products.CMFPlone.interfaces import INonInstallable
-# from zope.interface import implementer
+#-*- coding: utf-8 -*-
+from Products.CMFPlone.interfaces import INonInstallable
+from zope.interface import implementer
 
 
-# @implementer(INonInstallable)
-# class HiddenProfiles(object):
+@implementer(INonInstallable)
+class HiddenProfiles(object):
 
-#     def getNonInstallableProfiles(self):
-#         """Hide uninstall profile from site-creation and quickinstaller."""
-#         return [
-#             'pas.plugins.owncloud:uninstall',
-#         ]
-
-
-# def post_install(context):
-#     """Post install script"""
-#     # Do something at the end of the installation of this package.
+    def getNonInstallableProfiles(self):
+        """Hide uninstall profile from site-creation and quickinstaller."""
+        return [
+            'pas.plugins.owncloud:uninstall',
+        ]
 
 
-# def uninstall(context):
-#     """Uninstall script"""
-#     # Do something at the end of the uninstallation of this package.
+def post_install(context):
+    """Post install script"""
+    # Do something at the end of the installation of this package.
+
+
+def uninstall(context):
+    """Uninstall script"""
+    # Do something at the end of the uninstallation of this package.
+
 from pas.plugins.owncloud.plugin import OwncloudHelper
 
 TITLE = 'Owncloud PreAuth plugin (pas.plugins.owncloud)'
