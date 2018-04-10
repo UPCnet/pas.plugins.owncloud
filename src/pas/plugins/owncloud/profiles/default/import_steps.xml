@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<import-steps>
+ <import-step id="pas.plugins.owncloud.setup"
+              handler="pas.plugins.owncloud.setuphandlers.setupPlugin"
+              title="Setup Owncloud Plugin"
+              version="20180409">
+  <dependency step="plone-final"/>
+  Setup LDAP Plugin Owncloud
+ </import-step>
+</import-steps>
