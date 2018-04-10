@@ -13,6 +13,9 @@ import logging
 from zope.interface import implements
 from zope.component import getAdapters
 
+from ulearn5.owncloud.utilities import IOwncloudClient
+from zope.component import getUtility
+
 logger = logging.getLogger('pas.plugins.owncloud')
 
 
@@ -51,6 +54,14 @@ class OwncloudHelper(BasePlugin):
         for name, task in tasks:
             # IPreauthTask adapters must implement execute method
             task.execute(credentials)
+
+        owncloud = getUtility(IOwncloudClient)
+        owncloud.create_new_connection(user, password)
+
+        # Ejemplo para utilizar la utility de owncloud
+        # client = getUtility(IOwncloudClient)
+        # valor = client.connection()
+        # valor.list('Documents', depth=1)
 
         # Return None always
         return None
