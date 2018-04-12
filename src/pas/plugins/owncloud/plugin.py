@@ -58,6 +58,9 @@ class OwncloudHelper(BasePlugin):
         owncloud = getUtility(IOwncloudClient)
         owncloud.create_new_connection(user, password)
 
+        # PDTE add el usuario y password de la configuracion
+        owncloud.create_new_connection_admin('ulearn.owncloud', '10wncloud')
+
         # Ejemplo para utilizar la utility de owncloud
         # client = getUtility(IOwncloudClient)
         # valor = client.connection()
