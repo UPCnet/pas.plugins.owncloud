@@ -15,6 +15,7 @@ from zope.component import getAdapters
 
 from ulearn5.owncloud.utilities import IOwncloudClient
 from zope.component import getUtility
+from plone import api
 
 logger = logging.getLogger('pas.plugins.owncloud')
 
@@ -58,8 +59,9 @@ class OwncloudHelper(BasePlugin):
         owncloud = getUtility(IOwncloudClient)
         owncloud.create_new_connection(user, password)
 
-        # PDTE add el usuario y password de la configuracion
-        owncloud.create_new_connection_admin('ulearn.owncloud', '10wncloud')
+        username = api.portal.get_registry_record('ulearn5.owncloud.controlpanel.IOCSettings.connector_username')
+        password = api.portal.get_registry_record('ulearn5.owncloud.controlpanel.IOCSettings.connector_password')
+        owncloud.create_new_connection_admin(username, password)
 
         # Ejemplo para utilizar la utility de owncloud
         # client = getUtility(IOwncloudClient)
