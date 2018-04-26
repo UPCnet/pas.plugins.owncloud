@@ -1,5 +1,4 @@
-"""Class: OwncloudHelper
-"""
+"""Class: OwncloudHelper."""
 
 from AccessControl.SecurityInfo import ClassSecurityInfo
 from App.class_init import default__class_init__ as InitializeClass
@@ -21,24 +20,26 @@ logger = logging.getLogger('pas.plugins.owncloud')
 
 
 class OwncloudHelper(BasePlugin):
-    """PreAuth Multi-plugin"""
+    """PreAuth Multi-plugin."""
+
     meta_type = 'owncloud Helper'
     security = ClassSecurityInfo()
 
     implements(IOwncloudHelper, pas_interfaces.IAuthenticationPlugin)
 
     def __init__(self, id, title=None):
+        """Setup plugin."""
         self._setId(id)
         self.title = title
 
     security.declarePublic('authenticateCredentials')
     def authenticateCredentials(self, credentials):
-        """credentials -> (userid, login)
+        """Credentials -> (userid, login).
 
         o 'credentials' will be a mapping, as returned by IExtractionPlugin.
 
         o Return a tuple consisting of user ID (which may be different
-          from the login name) and login
+          from the login name) and login.
 
         o If the credentials cannot be authenticated, return None.
         """
@@ -56,17 +57,14 @@ class OwncloudHelper(BasePlugin):
             # IPreauthTask adapters must implement execute method
             task.execute(credentials)
 
+        # Connect user with OwnCloud in WebDAV mode
         owncloud = getUtility(IOwncloudClient)
         owncloud.create_new_connection(user, password)
 
+        # Connect admin user with OwnCloud in WebDAV mode
         username = api.portal.get_registry_record('ulearn5.owncloud.controlpanel.IOCSettings.connector_username')
         password = api.portal.get_registry_record('ulearn5.owncloud.controlpanel.IOCSettings.connector_password')
         owncloud.create_new_connection_admin(username, password)
-
-        # Ejemplo para utilizar la utility de owncloud
-        # client = getUtility(IOwncloudClient)
-        # valor = client.connection()
-        # valor.list('Documents', depth=1)
 
         # Return None always
         return None
