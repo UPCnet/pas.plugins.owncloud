@@ -59,7 +59,8 @@ class OwncloudHelper(BasePlugin):
 
         # Connect user with OwnCloud in WebDAV mode
         owncloud = getUtility(IOwncloudClient)
-        owncloud.create_new_connection(user, password)
+        if user != 'admin':
+            owncloud.create_new_connection(user, password)
 
         # Connect admin user with OwnCloud in WebDAV mode
         username = api.portal.get_registry_record('ulearn5.owncloud.controlpanel.IOCSettings.connector_username')
