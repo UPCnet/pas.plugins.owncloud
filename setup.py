@@ -14,7 +14,7 @@ long_description = '\n\n'.join([
 
 setup(
     name='pas.plugins.owncloud',
-    version='1.0',
+    version='1.1.dev0',
     description="Pas Plugins Owncloud",
     long_description=long_description,
     # Get more from https://pypi.python.org/pypi?%3Aaction=list_classifiers
